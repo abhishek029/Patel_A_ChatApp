@@ -1,0 +1,20 @@
+{
+  "name": "patel_a_chatapp",
+  "version": "1.0.0",
+  "description": "social media app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishek029/Patel_A_ChatApp.git"
+  },
+  "author": "Abhi",
+  "license": "ISC",
+  "homepage": "https://github.com/abhishek029/Patel_A_ChatApp#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
