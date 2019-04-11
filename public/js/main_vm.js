@@ -17,7 +17,8 @@ const vm = new Vue({
         socketID: "",
         nickname: "",
         message: "",
-        messages: []
+        messages: [],
+        online: "",
     },
 
     methods:{
@@ -25,6 +26,22 @@ const vm = new Vue({
             // send a chat message
             socket.emit('chat message', { content: this.message, name: this.nickname || "Anonymous"});
             this.message = "";
+            let toast = this.$toasted.show("Message Sent", { 
+                theme: "outline", 
+                position: "top-left", 
+                duration : 2000
+           });
+            // this.$toast.success('Sent');
+        },
+        typing(){
+            console.log("typing");
+            // show typing text
+
+            let toast = this.$toasted.show(this.nickname + ' is typing...', { 
+                theme: "outline", 
+                position: "top-right", 
+                duration : 2000
+           });
         }
     },
 

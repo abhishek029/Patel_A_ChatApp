@@ -5,6 +5,8 @@
 	<title>Socket IO Chat with Node!</title>
 	<link rel="stylesheet" href="css/main.css">
 	<script src="https://unpkg.com/vue"></script> 
+	<script src="https://unpkg.com/vue-toasted"></script>
+ 
 </head>
 <body>
 	<main id="app">		
@@ -24,7 +26,7 @@
 			<!-- <input v-model="nickname" type="text" id="nickname" class="nickname" placeholder="What is your nickname?"> -->
 			<!-- <label class="nickname" id="nickname">{{nickname}}</label> -->
 			<form>
-				<input v-model="message" class="message" type="text" autocomplete="off" placeholder="Type your message..." id="textarea">
+				<input v-model="message" class="message" type="text" autocomplete="off" @click="typing" placeholder="Type your message..." id="textarea">
 				<input type="submit" value="send" @click.prevent="dispatchMessage">
 			</form>
 		</section>
@@ -33,5 +35,8 @@
 	</main>
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="module" src="js/main_vm.js"></script>
+	<script>
+		Vue.use(Toasted)
+	</script>
 </body>
 </html>

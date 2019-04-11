@@ -15,6 +15,7 @@ main {
 .promo{
 	display: flex;
 	flex-direction: row;
+	flex: 1;
 	padding: 10px;	
 	background: black;
 	color: white;
@@ -48,15 +49,10 @@ main {
 }
 
 .messages { 
-	flex: 12;
+	flex: 10;
 	background-color: #eee;
 	border: 6px solid #e2e0e0; 
 }
-
-
-
-
-
 
 form {
 	display: flex;
