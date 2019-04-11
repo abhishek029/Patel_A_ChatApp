@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const io = require('socket.io')();
-
+let users = 0;
 // config port
 const port = process.env.PORT || 3000;
 
@@ -26,9 +26,10 @@ io.attach(server);
 
 io.on('connection', function(socket){
     console.log('a user has connected');
-    // this.emit('User1');
+    
+    users++;
     socket.emit('connected', {sID: `${socket.id}`, message: 'new connection'} );
-
+    io.emit('userCount', {numUsers: users});
     // listen for incoming message
     socket.on('chat message', function(msg){
         // check the message
@@ -40,5 +41,13 @@ io.on('connection', function(socket){
     
     socket.on('disconnect', function(){
         console.log('a user has disconnected');
+        users--;
+        io.emit('leftUser', {numUsers: users});
+    });
+
+    socket.on('typing', function(){
+        console.log('a user has disconnected');
+        
+        io.emit('userTyping');
     });
 });

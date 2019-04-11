@@ -1,7 +1,6 @@
 import ChatMessage from './modules/ChatMessage.js';
 
 const socket = io();
-
 function setUserId({sID, message}){
     
     console.log('connected', sID, message);
@@ -11,6 +10,22 @@ function setUserId({sID, message}){
 function appendMessage(message){
     vm.messages.push(message);
 }
+function showTyping(){
+    // vm.typing();
+    let toast = vm.$toasted.show(vm.nickname + ' is typing...', { 
+        theme: "outline", 
+        position: "top-right", 
+        duration : 2000
+   });
+}
+
+function onlineUsers(message){
+    vm.online = message.numUsers;
+}
+
+function offlineUser(message){
+    vm.online = message.numUsers;
+}
 
 const vm = new Vue({
     data: {
@@ -18,7 +33,7 @@ const vm = new Vue({
         nickname: "",
         message: "",
         messages: [],
-        online: "",
+        online: ""
     },
 
     methods:{
@@ -28,20 +43,14 @@ const vm = new Vue({
             this.message = "";
             let toast = this.$toasted.show("Message Sent", { 
                 theme: "outline", 
-                position: "top-left", 
+                position: "bottom-right", 
                 duration : 2000
            });
-            // this.$toast.success('Sent');
         },
         typing(){
             console.log("typing");
             // show typing text
-
-            let toast = this.$toasted.show(this.nickname + ' is typing...', { 
-                theme: "outline", 
-                position: "top-right", 
-                duration : 2000
-           });
+            socket.emit('typing');
         }
     },
 
@@ -53,3 +62,7 @@ const vm = new Vue({
 socket.addEventListener('connected', setUserId);
 socket.addEventListener('chat message', appendMessage);
 socket.addEventListener('disconnect', appendMessage);
+socket.addEventListener('userCount', onlineUsers);
+socket.addEventListener('leftUser', offlineUser);
+
+socket.addEventListener('userTyping', showTyping);

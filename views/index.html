@@ -11,7 +11,7 @@
 <body>
 	<main id="app">		
 		<div class="promo">
-			<span class="heading">HELLO ALL! 	Start your conversation as:</span>
+			<span class="heading"> HELLO ALL! 	Start your conversation as:</span>
 			<input v-model="nickname" type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
 		</div>
 		
@@ -26,6 +26,7 @@
 			<!-- <input v-model="nickname" type="text" id="nickname" class="nickname" placeholder="What is your nickname?"> -->
 			<!-- <label class="nickname" id="nickname">{{nickname}}</label> -->
 			<form>
+				<label> Online({{online}}) </label>
 				<input v-model="message" class="message" type="text" autocomplete="off" @click="typing" placeholder="Type your message..." id="textarea">
 				<input type="submit" value="send" @click.prevent="dispatchMessage">
 			</form>
